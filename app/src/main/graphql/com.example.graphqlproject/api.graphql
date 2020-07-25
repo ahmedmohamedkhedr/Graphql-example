@@ -1,0 +1,34 @@
+query data{
+    todos{
+        user{
+            name
+        }
+        created_at
+        title
+        id
+    }
+
+}
+
+query getUserPosts{
+    todos(where: {user: {name: {_eq: "akhedr2411"}}}) {
+        user{
+            name
+        }
+        title
+        created_at
+        id
+    }
+}
+
+
+mutation addTodo($todo: String!, $isPublic: Boolean!) {
+    insert_todos(objects: [{ title: $todo, is_public: $isPublic }]) {
+        returning {
+            id
+            title
+            created_at
+            is_completed
+        }
+    }
+}
